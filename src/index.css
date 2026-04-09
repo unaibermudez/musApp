@@ -1,0 +1,17 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #f7f2e8;
+  overflow: hidden;
+}
+
+input {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* Orientación landscape forzada vía AndroidManifest / Info.plist */
