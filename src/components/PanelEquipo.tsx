@@ -1,5 +1,7 @@
+import { useState } from "react";
 import { s } from "../styles.ts";
 import { useGesture } from "../hooks/useGesture.ts";
+import NombreModal from "./NombreModal.tsx";
 
 interface Props {
   nombre: string;
@@ -11,6 +13,8 @@ interface Props {
 }
 
 export default function PanelEquipo({ nombre, total, ganador, flash, onNombre, onDelta }: Props) {
+  const [editando, setEditando] = useState(false);
+
   const gesture = useGesture(
     () => onDelta(+1),
     () => onDelta(-1),
@@ -18,12 +22,9 @@ export default function PanelEquipo({ nombre, total, ganador, flash, onNombre, o
 
   return (
     <div style={s.panel(ganador)}>
-      <input
-        style={s.nombreInput}
-        value={nombre}
-        onChange={(e) => onNombre(e.target.value)}
-        maxLength={12}
-      />
+      <div style={s.nombreDisplay} onPointerDown={() => setEditando(true)}>
+        {nombre}
+      </div>
       <div style={s.marcador(ganador, flash)} {...gesture}>
         <span style={s.totalNum(ganador)}>{total}</span>
       </div>
@@ -32,6 +33,13 @@ export default function PanelEquipo({ nombre, total, ganador, flash, onNombre, o
         <button style={s.btnPanel("plus1")} onPointerDown={() => onDelta(+1)}>+1</button>
         <button style={s.btnPanel("minus")} onPointerDown={() => onDelta(-1)}>−1</button>
       </div>
+      {editando && (
+        <NombreModal
+          nombre={nombre}
+          onConfirmar={onNombre}
+          onCerrar={() => setEditando(false)}
+        />
+      )}
     </div>
   );
 }

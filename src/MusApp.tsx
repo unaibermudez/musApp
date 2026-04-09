@@ -14,9 +14,7 @@ export default function MusApp() {
     setNombre,
     cambiarTotal,
     cambiarApuesta,
-    deshacer,
     nuevaPartida,
-    confirmarReset,
   } = useMus();
 
   return (
@@ -45,11 +43,6 @@ export default function MusApp() {
           onNombre={(v) => setNombre(1, v)}
           onDelta={(d) => cambiarTotal(1, d)}
         />
-      </div>
-
-      <div style={s.footer}>
-        <button style={s.btnFooter(false)} onPointerDown={deshacer}>↩ Deshacer</button>
-        <button style={s.btnFooter(true)} onPointerDown={confirmarReset}>Reiniciar</button>
       </div>
 
       <GanadorModal

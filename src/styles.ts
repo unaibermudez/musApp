@@ -58,9 +58,8 @@ export const s = {
     borderRadius: 0,
     transition: "border-color 0.3s ease, outline-color 0.3s ease",
   }),
-  nombreInput: {
+  nombreDisplay: {
     background: "transparent",
-    border: "none",
     borderBottom: `1px solid ${BLUE25}`,
     color: INK55,
     fontSize: "0.65rem",
@@ -69,10 +68,12 @@ export const s = {
     letterSpacing: "0.3em",
     textTransform: "uppercase",
     textAlign: "center",
-    outline: "none",
     width: "100%",
     padding: "2px 4px",
     lineHeight: 1.8,
+    cursor: "pointer",
+    touchAction: "none",
+    WebkitTapHighlightColor: "transparent",
   },
   marcador: (ganador: boolean, flash: boolean): CSSProperties => ({
     flex: 1,
@@ -183,30 +184,6 @@ export const s = {
     margin: "1px 0",
   },
 
-  /* ─── Footer ─── */
-  footer: {
-    display: "flex",
-    justifyContent: "center",
-    gap: 14,
-    padding: "5px 12px 10px",
-    borderTop: `1px solid ${BLUE15}`,
-  },
-  btnFooter: (danger: boolean): CSSProperties => ({
-    padding: "4px 18px",
-    border: `1px solid ${BLUE25}`,
-    borderRadius: 0,
-    background: "transparent",
-    color: danger ? INK35 : INK55,
-    fontSize: "0.65rem",
-    fontFamily: CRIMSON,
-    fontWeight: 600,
-    letterSpacing: "0.3em",
-    textTransform: "uppercase",
-    cursor: "pointer",
-    WebkitTapHighlightColor: "transparent",
-    lineHeight: 1.8,
-  }),
-
   /* ─── Modal ─── */
   overlay: {
     position: "fixed",
@@ -260,5 +237,23 @@ export const s = {
     textTransform: "uppercase",
     cursor: "pointer",
     lineHeight: 1.8,
+  },
+  modalInput: {
+    background: "transparent",
+    border: "none",
+    borderBottom: `1px solid ${BLUE45}`,
+    color: INK,
+    fontSize: "1rem",
+    fontFamily: CRIMSON,
+    fontWeight: 600,
+    letterSpacing: "0.1em",
+    textAlign: "center",
+    outline: "none",
+    width: "100%",
+    padding: "4px 8px",
+    lineHeight: 1.8,
+    marginTop: 12,
+    marginBottom: 4,
+    boxSizing: "border-box",
   },
 } satisfies StyleMap;

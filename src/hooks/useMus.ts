@@ -7,7 +7,6 @@ const LS_ESTADO  = "mus-estado";
 export function useMus() {
   const [nombres, setNombres] = useState<[string, string]>(["Nosotros", "Ellos"]);
   const [estado, setEstado]   = useState<EstadoMus>(initialState);
-  const [historial, setHistorial] = useState<EstadoMus[]>([]);
   const [flash, setFlash]     = useState<[boolean, boolean]>([false, false]);
   const [ganadorModal, setGanadorModal] = useState<0 | 1 | null>(null);
 
@@ -28,7 +27,6 @@ export function useMus() {
   }, []);
 
   const cambiarTotal = (idx: 0 | 1, delta: number) => {
-    setHistorial((h) => [...h.slice(-29), JSON.parse(JSON.stringify(estado)) as EstadoMus]);
     setEstado((prev) => {
       const next: EstadoMus = { ...prev, total: [...prev.total] as [number, number] };
       next.total[idx] = Math.min(MAX_TOTAL, Math.max(0, next.total[idx] + delta));
@@ -55,24 +53,11 @@ export function useMus() {
     guardar(next, estado);
   };
 
-  const deshacer = () => {
-    if (!historial.length) return;
-    const prev = historial[historial.length - 1];
-    setHistorial((h) => h.slice(0, -1));
-    setEstado(prev);
-    guardar(nombres, prev);
-  };
-
   const nuevaPartida = () => {
     const fresh = initialState();
     setEstado(fresh);
-    setHistorial([]);
     setGanadorModal(null);
     guardar(nombres, fresh);
-  };
-
-  const confirmarReset = () => {
-    if (window.confirm("¿Reiniciar la partida?")) nuevaPartida();
   };
 
   return {
@@ -83,8 +68,6 @@ export function useMus() {
     setNombre,
     cambiarTotal,
     cambiarApuesta,
-    deshacer,
     nuevaPartida,
-    confirmarReset,
   };
 }

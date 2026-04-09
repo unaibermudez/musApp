@@ -8,6 +8,7 @@ export function useBetGesture(
   onSwipeLeft: () => void,
   onSwipeRight: () => void,
   onSwipeDown: () => void,
+  onSwipeUp: () => void,
 ) {
   const start = useRef({ x: 0, y: 0 });
 
@@ -29,6 +30,8 @@ export function useBetGesture(
         else onSwipeRight();
       } else if (dy > 0) {
         onSwipeDown();
+      } else {
+        onSwipeUp();
       }
     },
     onPointerCancel: () => {},

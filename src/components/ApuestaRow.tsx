@@ -27,15 +27,22 @@ export default function ApuestaRow({ nombre, valor, onChange, onCommit }: Props)
     () => commit(0),
     () => commit(1),
     () => onChange(Math.max(0, valor - 1)),
+    () => onChange(nextBetValue(valor)),
   );
 
   return (
     <div style={s.apuestaBloque}>
       <span style={s.apuestaLabel}>{LABEL[nombre]}</span>
       <div style={s.apuestaSquare(active)} {...gesture}>
-        <span style={s.apuestaArrow(active)}>‹</span>
+        <span
+          style={s.apuestaArrow(active)}
+          onPointerDown={(e) => { e.stopPropagation(); commit(0); }}
+        >‹</span>
         <span style={s.apuestaValue(active)}>{active ? valor : "·"}</span>
-        <span style={s.apuestaArrow(active)}>›</span>
+        <span
+          style={s.apuestaArrow(active)}
+          onPointerDown={(e) => { e.stopPropagation(); commit(1); }}
+        >›</span>
       </div>
     </div>
   );
